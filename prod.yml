@@ -1,0 +1,25 @@
+version: "3"
+services:
+  nginx:
+    container_name: nginx
+    image: antonioanerao/nginx:alpine.prod.1.0.0
+    build:
+      context: .
+      dockerfile: build/prod/nginx/Dockerfile
+    networks:
+      - internal
+    ports:
+      - "80:80"
+
+  php:
+    container_name: php
+    image: antonioanerao/php:fpm-alpine.prod.1.0.0
+    build:
+      context: .
+      dockerfile: build/prod/php/Dockerfile
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge

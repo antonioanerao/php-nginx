@@ -5,4 +5,4 @@ WORKDIR /laravel
 
 RUN apk update && apk upgrade
 
-ADD nginx/default.conf /etc/nginx/conf.d
+ADD build/dev/nginx/default.conf /etc/nginx/conf.d

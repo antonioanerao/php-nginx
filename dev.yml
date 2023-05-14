@@ -2,29 +2,28 @@ version: "3"
 services:
   nginx:
     container_name: nginx
-    image: antonioanerao/nginx:alpine
+    image: antonioanerao/nginx:alpine.dev.1.0.0
     build:
       context: .
-      dockerfile: nginx/Dockerfile
+      dockerfile: build/dev/nginx/Dockerfile
     networks:
       - internal
     ports:
       - "80:80"
     volumes:
-      - ./data:/laravel
       - ./logs/nginx:/var/log/nginx/
 
   php:
     container_name: php
-    image: antonioanerao/php:fpm-alpine
+    image: antonioanerao/php:fpm-alpine.dev.1.0.0
     build:
       context: .
-      dockerfile: php/Dockerfile
+      dockerfile: build/dev/php/Dockerfile
     networks:
       - internal
     volumes:
       - ./data/:/laravel
-      - ./logs/php.log:/var/log/fpm-php.www.log
+      - ./logs/php:/var/log/fpm-php.www.log
 
 networks:
   internal:

@@ -7,13 +7,11 @@ WORKDIR /laravel
 COPY --from=mssql /opt/microsoft/ /opt/microsoft/
 COPY --from=mssql /opt/mssql-tools/ /opt/mssql-tools/
 COPY --from=mssql /usr/lib/libmsodbcsql-13.so /usr/lib/libmsodbcsql-13.so
-COPY php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 
 RUN apk update && apk add \
 		freetype-dev \
 		libjpeg-turbo-dev \
 		libpng-dev && \
-	docker-php-ext-install opcache && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
 	docker-php-ext-install -j$(nproc) gd
 

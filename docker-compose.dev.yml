@@ -2,7 +2,7 @@ version: "3"
 services:
   nginx:
     container_name: nginx
-    image: antonioanerao/nginx:alpine.dev.1.0.0
+    image: antonioanerao/nginx:alpine.dev.${IMAGEM_NGINX_DEV_VERSAO}
     build:
       context: .
       dockerfile: build/dev/nginx/Dockerfile
@@ -11,11 +11,12 @@ services:
     ports:
       - "80:80"
     volumes:
+      - ./data:/laravel
       - ./logs/nginx:/var/log/nginx/
 
   php:
     container_name: php
-    image: antonioanerao/php:fpm-alpine.dev.1.0.0
+    image: antonioanerao/php:fpm-alpine.dev.${IMAGEM_PHP_DEV_VERSAO}
     build:
       context: .
       dockerfile: build/dev/php/Dockerfile

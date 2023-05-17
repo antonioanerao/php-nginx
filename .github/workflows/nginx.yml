@@ -1,0 +1,20 @@
+name: Docker Image CI for nginx
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Switch to buildx drive
+      run: docker buildx create --use
+    - name: Build the development Docker image for nginx
+      run: docker buildx build --platform linux/amd64,linux/arm64/v8 -t nginx:dev -f build/dev/nginx/Dockerfile . --no-cache
+    - name: Build the production Docker image for nginx
+      run: docker buildx build --platform linux/amd64,linux/arm64/v8 -t nginx:prod -f build/prod/nginx/Dockerfile . --no-cache
+

@@ -1,0 +1,20 @@
+name: Docker Image CI for php
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Switch to buildx drive
+      run: docker buildx create --use
+    - name: Build the development Docker image for php
+      run: docker buildx build --platform linux/amd64,linux/arm64/v8 -t php:dev -f build/dev/php/Dockerfile . --no-cache
+    - name: Build the production Docker image for php
+      run: docker buildx build --platform linux/amd64,linux/arm64/v8 -t php:prod -f build/prod/php/Dockerfile . --no-cache
+

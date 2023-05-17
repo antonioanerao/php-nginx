@@ -2,7 +2,7 @@ version: "3"
 services:
   nginx:
     container_name: nginx
-    image: antonioanerao/nginx:alpine.dev.${IMAGEM_NGINX_DEV_VERSAO}
+    image: ${IMAGEM_NGINX_DEV_NOME}:${IMAGEM_NGINX_DEV_VERSAO}
     build:
       context: .
       dockerfile: build/dev/nginx/Dockerfile
@@ -16,7 +16,7 @@ services:
 
   php:
     container_name: php
-    image: antonioanerao/php:fpm-alpine.dev.${IMAGEM_PHP_DEV_VERSAO}
+    image: ${IMAGEM_PHP_DEV_NOME}:${IMAGEM_PHP_DEV_VERSAO}
     build:
       context: .
       dockerfile: build/dev/php/Dockerfile

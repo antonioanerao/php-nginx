@@ -1,0 +1,25 @@
+version: "3"
+services:
+  nginx:
+    container_name: nginx
+    image: ${IMAGEM_NGINX_PROD_NOME}:${IMAGEM_NGINX_PROD_VERSAO}
+    build:
+      context: .
+      dockerfile: build/prod/nginx/Dockerfile
+    networks:
+      - internal
+    ports:
+      - "80:80"
+
+  php:
+    container_name: php
+    image: ${IMAGEM_PHP_PROD_NOME}:${IMAGEM_PHP_PROD_VERSAO}
+    build:
+      context: .
+      dockerfile: build/prod/php/Dockerfile
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge

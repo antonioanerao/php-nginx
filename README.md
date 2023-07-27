@@ -48,7 +48,17 @@ $ docker build -t nome-da-imagem:versao -f build/dev/php/Dockerfile .
 # versão prod
 $ docker build -t nome-da-imagem:versao -f build/prod/nginx/Dockerfile .
 $ docker build -t nome-da-imagem:versao -f build/prod/php/Dockerfile .
-``` 
+```
+
+### Build multi-arch
+
+``` bash
+# Ative o drive que suporta multi-arch
+$ docker buildx create --use
+
+# troque o build/dev para build/prod se estiver buildando a versão para produção
+$ docker buildx build --push --platform linux/arm64/v8,linux/amd64 --tag nome-da-imagem:versao -f build/dev/php/Dockerfile .
+```
 
 #### PHP Modules
     - Core

@@ -99,6 +99,9 @@ $ docker buildx build --push --platform linux/arm64/v8,linux/amd64 --tag nome-da
     - xmlwriter
     - Zend OPcache (versão de produção apenas)
     - zlib
+
+
+#### *Certifique-se de que o GUID do seu grupo www-data seja o mesmo que o GUID do grupo www-data dentro do container
     
 #### Prefere apenas rodar as imagens e subir seu container sem fazer o build da imagem?
 - Imagem para o Nginx: [https://hub.docker.com/r/antonioanerao/nginx](https://hub.docker.com/r/antonioanerao/nginx)

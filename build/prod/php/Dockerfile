@@ -1,5 +1,5 @@
 FROM mcr.microsoft.com/mssql-tools as mssql
-FROM php:fpm-alpine
+FROM php:8.2.8-fpm-alpine3.18
 
 VOLUME [ "/laravel" ]
 WORKDIR /laravel
@@ -12,8 +12,13 @@ RUN apk update && apk add \
 		freetype-dev \
 		libjpeg-turbo-dev \
 		libpng-dev \
+		ldb-dev \ 
+		libldap \
+		openldap-dev \
 	    && docker-php-ext-install opcache \
-        && docker-php-ext-configure gd --with-freetype --with-jpeg \
+	    && docker-php-ext-install ldap \
+	    && docker-php-ext-enable ldap \
+            && docker-php-ext-configure gd --with-freetype --with-jpeg \
 	    && docker-php-ext-install -j$(nproc) gd
 
 RUN curl -O https://download.microsoft.com/download/1/f/f/1fffb537-26ab-4947-a46a-7a45c27f6f77/msodbcsql18_18.2.1.1-1_amd64.apk && \
